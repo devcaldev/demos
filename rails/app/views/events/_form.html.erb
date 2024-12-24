@@ -1,0 +1,26 @@
+<%= form_with(model: event,html: {style: 'display:flex;flex-direction:column;width:100%'}) do |form| %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+  <%= form.datetime_local_field :dtstart %>
+  
+  <%= form.datetime_local_field :dtend %>
+  
+  <%= form.text_field :rrule, placeholder: 'FREQ=MONTHLY;INTERVAL=1;BYDAY=1MO,-1SU' %>
+  
+  <%= form.text_area :props, value: form.object.props&.to_json, placeholder: '{}' %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,341 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Devcal - OpenAPI 3.0",
+    "description": "This is a sample Devcal Consumer Server based on the OpenAPI 3.0 specification. ",
+    "contact": {
+      "email": "dev@devcal.dev"
+    },
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9090"
+    }
+  ],
+  "paths": {
+    "/insertEvent": {
+      "post": {
+        "summary": "Insert new event",
+        "description": "Insert new event",
+        "operationId": "insertEvent",
+        "requestBody": {
+          "description": "InsertEvent params",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InsertEventParams"
+              },
+              "examples": {
+                "bare_minimum": {
+                  "value": {
+                    "Dtstart": "2024-12-22T20:57:39.882Z",
+                    "Dtend": "2024-12-22T21:57:39.882Z"
+                  }
+                },
+                "recurring": {
+                  "value": {
+                    "Dtstart": "2024-01-01T09:00:00.000Z",
+                    "Dtend": "2024-01-01T10:00:00.000Z",
+                    "Rrule": "FREQ=MONTHLY;INTERVAL=1;BYDAY=1MO,-1SU"
+                  }
+                },
+                "with_props": {
+                  "value": {
+                    "Dtstart": "1889-05-01T00:00:00.000Z",
+                    "Dtend": "1889-05-02T00:00:00.000Z",
+                    "Rrule": "FREQ=YEARLY;INTERVAL=1;BYMONTH=5;BYMONTHDAY=1",
+                    "Props": {
+                      "calendar_id": "holidays",
+                      "event_name": "Mayday"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Invalid request"
+          },
+          "5XX": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/listEvents": {
+      "post": {
+        "summary": "Finds events by date and period and/or props",
+        "description": "Finds events by date and period and/or props",
+        "operationId": "listEvents",
+        "requestBody": {
+          "description": "ListEvent params",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListEventParams"
+              },
+              "examples": {
+                "with_date_and_period": {
+                  "value": {
+                    "Date": "2024-12-22T20:57:39.882Z",
+                    "Period": "year"
+                  }
+                },
+                "with_props_only": {
+                  "value": {
+                    "Props": {
+                      "calendar_id": "holidays"
+                    }
+                  }
+                },
+                "with_date_and_period_and_props": {
+                  "value": {
+                    "Date": "2024-12-22T20:57:39.882Z",
+                    "Period": "year",
+                    "Props": {
+                      "calendar_id": "holidays"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Invalid request"
+          },
+          "5XX": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/getEvent": {
+      "post": {
+        "summary": "Get single event by ID",
+        "description": "Get single event by ID",
+        "operationId": "getEvent",
+        "requestBody": {
+          "description": "GetEvent params",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetEventParams"
+              },
+              "example": {
+                "ID": "0c73ff78-e687-49da-b3b3-059579c2e3f6"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Invalid request"
+          },
+          "5XX": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/updateEvent": {
+      "post": {
+        "summary": "Update single event by ID",
+        "description": "Update single event by ID",
+        "operationId": "updateEvent",
+        "requestBody": {
+          "description": "UpdateEvent params",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventParams"
+              },
+              "example": {
+                "ID": "0c73ff78-e687-49da-b3b3-059579c2e3f6",
+                "Props": {
+                  "color": "red"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "4XX": {
+            "description": "Invalid request"
+          },
+          "5XX": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/deleteEvent": {
+      "post": {
+        "summary": "Delete single event by ID",
+        "description": "Delete single event by ID",
+        "operationId": "deleteEvent",
+        "requestBody": {
+          "description": "DeleteEvent params",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteEventParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "4XX": {
+            "description": "Invalid request"
+          },
+          "5XX": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string"
+          },
+          "AccountID": {
+            "type": "string"
+          },
+          "Dtstart": {
+            "type": "string"
+          },
+          "Dtend": {
+            "type": "string"
+          },
+          "Rrule": {
+            "type": "string"
+          },
+          "Props": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "InsertEventParams": {
+        "type": "object",
+        "properties": {
+          "Dtstart": {
+            "type": "string"
+          },
+          "Dtend": {
+            "type": "string"
+          },
+          "Rrule": {
+            "type": "string"
+          },
+          "Props": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "ListEventParams": {
+        "type": "object",
+        "properties": {
+          "Date": {
+            "type": "string"
+          },
+          "Period": {
+            "type": "string"
+          },
+          "Props": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "GetEventParams": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEventParams": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string"
+          },
+          "Dtstart": {
+            "type": "string"
+          },
+          "Dtend": {
+            "type": "string"
+          },
+          "Rrule": {
+            "type": "string"
+          },
+          "Props": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "DeleteEventParams": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

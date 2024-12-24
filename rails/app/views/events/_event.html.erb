@@ -1,0 +1,25 @@
+<div id="<%= dom_id event %>">
+  <div>
+  <%= event.user_id %>
+  </div>
+
+  <div>
+  <%= event.id %>
+  </div>
+
+  <div>
+  <%= event.dtstart %>
+  </div>
+
+  <div>
+  <%= event.dtend %>
+  </div>
+
+  <div>
+  <%= event.rrule %>
+  </div>
+
+  <div>
+  <%= event.props.to_json %>
+  </div>
+</div>
