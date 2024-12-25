@@ -3,9 +3,9 @@ class EventsController < ApplicationController
 
   # GET /events
   def index
-    list_params = {Props: {"user_id" => Current.user.id}}
-    list_params[:Props].update(params[:props]) if params[:props]
-    list_params[:Range] = {Date: params[:date], Period: params[:period]} if params[:date] && params[:period]
+    list_params = params.permit(:date,:period,:props).to_h
+    list_params[:props] ||= {}
+    list_params[:props]['user_id'] = Current.user.id
     @events = Event.where(list_params)
   end
 

@@ -43,13 +43,13 @@ class Event
   end
 
   def self.find(id)
-    Event.from_devcal(DEVCAL.get_event(ID: id))
+    Event.from_devcal(DEVCAL.get_event(id: id))
   end
 
   def self.from_devcal(devcal_event)
-    props = devcal_event.Props.to_h.deep_stringify_keys
+    props = devcal_event.props.to_h.deep_stringify_keys
     user_id = props.delete('user_id')
-    Event.new(user_id: user_id, id: devcal_event.ID, dtstart: devcal_event.Dtstart.to_time, dtend: devcal_event.Dtend.to_time, props: props)
+    Event.new(user_id: user_id, id: devcal_event.id, dtstart: devcal_event.dtstart.to_time, dtend: devcal_event.dtend.to_time, props: props)
   end
 
   def persisted?
@@ -62,7 +62,7 @@ class Event
   end
 
   def destroy
-    DEVCAL.delete_event(ID: id)
+    DEVCAL.delete_event(id: id)
     self.id = nil
   end
 
@@ -73,12 +73,12 @@ class Event
   private
 
   def insert
-    devcal_event = DEVCAL.insert_event(Dtstart: dtstart.to_time, Dtend: dtend.to_time, Rrule: rrule, Props: devcal_props)
-    self.id = devcal_event.ID
+    devcal_event = DEVCAL.insert_event(dtstart: dtstart.to_time, dtend: dtend.to_time, rrule: rrule, props: devcal_props)
+    self.id = devcal_event.id
   end
 
   def update
-    DEVCAL.update_event(ID: id, Dtstart: dtstart.to_time, Dtend: dtend.to_time, Rrule: rrule, Props: devcal_props)
+    DEVCAL.update_event(id: id, dtstart: dtstart.to_time, dtend: dtend.to_time, rrule: rrule, props: devcal_props)
   end
 
   def devcal_props
