@@ -5,7 +5,7 @@ info:
     This is a sample Devcal Consumer Server based on the OpenAPI 3.0 specification. 
   contact:
     email: dev@devcal.dev
-  version: 0.1.0
+  version: 0.2.0
 servers:
   - url: http://localhost:9090
 paths:
@@ -23,19 +23,19 @@ paths:
             examples:
               bare_minimum:
                 value:
-                  Dtstart: "2024-12-22T20:57:39.882Z"
-                  Dtend: "2024-12-22T21:57:39.882Z"
+                  dtstart: "2024-12-22T20:57:39.882Z"
+                  dtend: "2024-12-22T21:57:39.882Z"
               recurring:
                 value:
-                  Dtstart: "2024-01-01T09:00:00.000Z"
-                  Dtend: "2024-01-01T10:00:00.000Z"
-                  Rrule: "FREQ=MONTHLY;INTERVAL=1;BYDAY=1MO,-1SU"
+                  dtstart: "2024-01-01T09:00:00.000Z"
+                  dtend: "2024-01-01T10:00:00.000Z"
+                  rrule: "FREQ=MONTHLY;INTERVAL=1;BYDAY=1MO,-1SU"
               with_props:
                 value:
-                  Dtstart: "1889-05-01T00:00:00.000Z"
-                  Dtend: "1889-05-02T00:00:00.000Z"
-                  Rrule: "FREQ=YEARLY;INTERVAL=1;BYMONTH=5;BYMONTHDAY=1"
-                  Props:
+                  dtstart: "1889-05-01T00:00:00.000Z"
+                  dtend: "1889-05-02T00:00:00.000Z"
+                  rrule: "FREQ=YEARLY;INTERVAL=1;BYMONTH=5;BYMONTHDAY=1"
+                  props:
                     calendar_id: "holidays"
                     event_name: "Mayday"
         required: true
@@ -64,17 +64,17 @@ paths:
             examples:
               with_date_and_period:
                 value:
-                  Date: "2024-12-22T20:57:39.882Z"
-                  Period: "year"
+                  date: "2024-12-22T20:57:39.882Z"
+                  period: "year"
               with_props_only:
                 value:
-                  Props:
+                  props:
                     calendar_id: "holidays"
               with_date_and_period_and_props:
                 value:
-                  Date: "2024-12-22T20:57:39.882Z"
-                  Period: "year"
-                  Props:
+                  date: "2024-12-22T20:57:39.882Z"
+                  period: "year"
+                  props:
                     calendar_id: "holidays"
         required: true
       responses:
@@ -100,7 +100,7 @@ paths:
             schema:
               $ref: '#/components/schemas/GetEventParams'
             example:
-              ID: "0c73ff78-e687-49da-b3b3-059579c2e3f6"
+              id: "0c73ff78-e687-49da-b3b3-059579c2e3f6"
         required: true
       responses:
         '200':
@@ -125,8 +125,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateEventParams'
             example:
-              ID: "0c73ff78-e687-49da-b3b3-059579c2e3f6"
-              Props:
+              id: "0c73ff78-e687-49da-b3b3-059579c2e3f6"
+              props:
                 color: "red"
         required: true
       responses:
@@ -160,62 +160,62 @@ components:
     Event:
       type: object
       properties:
-        ID:
+        id:
           type: string
-        AccountID:
+        account_id:
           type: string
-        Dtstart:
+        dtstart:
           type: string
-        Dtend:
+        dtend:
           type: string
-        Rrule:
+        rrule:
           type: string
-        Props:
+        props:
           type: object
           additionalProperties: true
     InsertEventParams:
       type: object
       properties:
-        Dtstart:
+        dtstart:
           type: string
-        Dtend:
+        dtend:
           type: string
-        Rrule:
+        rrule:
           type: string
-        Props:
+        props:
           type: object
           additionalProperties: true
     ListEventParams:
       type: object
       properties:
-        Date:
+        date:
           type: string
-        Period:
+        period:
           type: string
-        Props:
+        props:
           type: object
           additionalProperties: true
     GetEventParams:
       type: object
       properties:
-        ID:
+        id:
           type: string
     UpdateEventParams:
       type: object
       properties:
-        ID:
+        id:
           type: string
-        Dtstart:
+        dtstart:
           type: string
-        Dtend:
+        dtend:
           type: string
-        Rrule:
+        rrule:
           type: string
-        Props:
+        props:
           type: object
           additionalProperties: true
     DeleteEventParams:
       type: object
       properties:
-        ID:
+        id:
           type: string
