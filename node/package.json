@@ -12,5 +12,8 @@
     "@charlypoirier/uwebsocket-serve": "^1.0.9",
     "devcal": "github:devcaldev/devcal-node",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.51.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.6.1"
   }
 }

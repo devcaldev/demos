@@ -1,5 +1,3 @@
-#devcal node example
+# devcal node demo
 
-you need an api key to run this example application. get one at [https://devcal.dev](https://devcal.dev)
-
-start the server with `node main.js` and open http://localhost:9001 on your browser.
+live at [https://devcal-node-demo.fly.dev/](https://devcal-node-demo.fly.dev/)
