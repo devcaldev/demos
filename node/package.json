@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devcaldev/demos.git"
+  },
+  "dependencies": {
+    "@charlypoirier/uwebsocket-serve": "^1.0.9",
+    "devcal": "github:devcaldev/devcal-node",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.51.0"
+  }
+}

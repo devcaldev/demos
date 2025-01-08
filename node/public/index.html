@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>devcal node uws demo</title>
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
+    <link href="https://unpkg.com/sanitize.css/forms.css" rel="stylesheet" />
+    <script src="https://unpkg.com/rrule@2.8.1/dist/es5/rrule.js"></script>
+    <style>
+      body{
+        margin: 1rem;
+        font-size: 0.875rem;
+        line-height: 1rem;
+      }
+      form {
+        display:flex;
+        flex-direction:column;
+        gap: .5rem;
+        flex: auto;
+      }
+      label {
+        flex: auto;
+        display: flex;
+        flex-direction:column;
+        gap: .25rem;
+      }
+      input,
+      textarea,
+      select {
+        flex: auto;
+      }
+      textarea{
+        resize:vertical;
+      }
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        flex: auto;
+      }
+      tr,td,th{
+        text-align:left;
+        vertical-align:baseline;
+      }
+      tr {border-bottom: 1px solid #d1d1d1}
+      td {padding:.25rem}
+      .hidden {display:none}
+      .table-container {width:100%;overflow:auto}
+    </style>
+  </head>
+  <body>
+    <header id="login" class="hidden">
+      <h4>Login with your API key to continue</h4>
+      <p>No key? No problem. <a href="https://www.devcal.dev/apikeys" target="_blank">Get your key here</a></p>
+      <form id="loginForm">
+        <input name="apikey" placeholder="api key">
+        <button type="submit">Login</button>
+      </form>
+    </header>
+
+    <main id="main" class="hidden">
+      <section>
+        <form id="eventForm">
+          <h4>New Event</h4>
+          <input type="hidden" name="id">
+          <label>dtstart <input type="datetime-local" name="dtstart"></label>
+          <label>dtend <input type="datetime-local" name="dtend"></label>
+          <label>rrule <input type="text" name="rrule"></label>
+          <label>props <textarea name="props"></textarea></label>
+          <button type="submit">Save</button>
+          <button type="reset">Clear</button>
+        </form>
+
+        <form id="listEventsForm">
+          <h4>List Events</h4>
+          <label>date <input type="date" name="date"></label>
+          <label>period <select name="period">
+            <option></option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select></label>
+          <label>props <textarea name="props"></textarea></label>
+          <button type="submit">List</button>
+          <button type="reset">Clear</button>
+        </form>
+      </section>
+
+      <h4>Events List</h4>
+      <div class="table-container">
+        <table id="eventsTable">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>account_id</th>
+              <th>dtstart</th>
+              <th>dtend</th>
+              <th>rrule</th>
+              <th>props</th>
+              <th>reccurence event</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="/index.js"></script>
+  </body>
+</html>
